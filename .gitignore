@@ -1,4 +1,7 @@
 dist/
 build/
 *.egg-info/
-
+zhihu_daily/
+zhihu/
+__pycache__/
+.idea
