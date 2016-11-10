@@ -14,7 +14,7 @@ class FsWriter:
     def write_summary(self, source=[]):
         # write summary
         titles = ['%s: %s\n' % (topic.get('id'), topic.get('title')) for topic in source]
-        fp = open(self._get_path('summary.txt'), 'w')
+        fp = open(self._get_path('summary.txt'), 'w', encoding='utf-8')
         fp.writelines(titles)
         fp.close()
 
@@ -26,7 +26,7 @@ class FsWriter:
         base = self._get_path(source.get('id', 'Unknown'))
         if not os.path.exists(base):
             os.mkdir(base)  # 以id名创建文件夹
-        fp = open(self._get_path(source.get('title'), base), 'w')
+        fp = open(self._get_path(source.get('title')+'.txt', base), 'w', encoding='utf-8')
         # 写背景
         if 'background' in source:
             bg = source['background']

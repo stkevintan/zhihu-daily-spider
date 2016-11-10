@@ -21,7 +21,7 @@ class RequestWrap:
         data = res.read()
         if utf8:
             data = data.decode('utf-8')
-            return bs(data, 'lxml')
+            return bs(data, 'html5lib')
         else:
             return data
 

@@ -97,7 +97,7 @@ class Spider:
         for topic in self.topics:
             topic_id = topic.get('id')
             topic_title = topic.get('title')
-            url = self.url + 'story/' + topic_id
+            url = self.url + '/story/' + topic_id
             # 使用多线程
             t = threading.Thread(target=self.get_detail, args=[url, {'title': topic_title, 'id': topic_id}])
             t.start()
