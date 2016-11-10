@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='zhihu-spider',
+    name='zhihu-daily-spider',
     author='Kevin Tan',
     description='一个可以自动抓取知乎日报热门文章及文章中的图片的爬虫',
     version='0.1',
@@ -10,7 +10,7 @@ setup(
     packages=find_packages("spider"),
     entry_points={
         'console_scripts': [
-            'zhihu-spider = spider.cmd:main'
+            'zhihu-daily-spider = spider.cmd:main'
         ]
     }
 )
