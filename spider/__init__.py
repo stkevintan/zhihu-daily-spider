@@ -41,7 +41,7 @@ class Spider:
         return blocks[0] if blocks.__len__() > 0 else None
 
     def get_detail(self, url, base):
-        print('going to fetch data from %s' % url)
+        print('[REQUEST SENDED] Start to fetch content from %s' % url)
         html_detail = self.request.get(url)
         result = base.copy()
         # 获得相关新闻信息
@@ -78,19 +78,21 @@ class Spider:
                     # 获得图片数据
                     for img_url in cur_question['image_list']:
                         # 多线程下载图片
-                        print('start downloading image from %s' % img_url)
+
                         t = threading.Thread(target=self.get_image, args=[img_url, base])
                         t.start()
         self.writer.write_content(result)
-        print('one topic(id = %s) has completed' % result.get('id'))
+        print('[REQUEST COMPLETED] A content has been fetched, title: ' + base['title'])
 
     def get_image(self, url, base):
+        image_name = re.search(r'\w+(?:\.\w+)?$', url).group() or 'Unknown'
+        print('[REQUEST SENDED] Start to download image from %s' % url)
         html_image = self.request.get(url, headers={"Host": "pic2.zhimg.com"}, utf8=False)
-        print('downloading has been complete')
+        print('[REQUEST COMPLETED] A image downloading has been completed, name: ' + image_name)
         result = base.copy()
         result['data'] = html_image
         # 获取图片名称
-        result['name'] = re.search(r'\w+(?:\.\w+)?$', url).group()
+        result['name'] = image_name
         self.writer.write_image(result)
 
     def get_details(self):
